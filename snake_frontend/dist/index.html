@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Snake 84, une borne d'arcade rétro en 3D avec trois univers visuels.">
+    <title>Snake 84 — Retro Arcade</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-theme="neon">
+    <div class="scene-background" aria-hidden="true"></div>
+    <div class="scene-vignette" aria-hidden="true"></div>
+    <div class="pixel-noise" aria-hidden="true"></div>
+
+    <header class="top-bar">
+      <a class="brand" href="#arcade">
+        <span class="brand-mark">S</span>
+        <span>PIXEL PIT</span>
+      </a>
+      <div class="top-status">
+        <span class="live-light"></span>
+        ARCADE SYSTEM 1984
+      </div>
+    </header>
+
+    <main class="experience" id="arcade">
+      <section class="arcade-zone" aria-label="Borne d'arcade Snake 84">
+        <div class="arcade-machine">
+          <div class="machine-top-depth" aria-hidden="true"></div>
+
+          <header class="marquee">
+            <p>Original arcade game</p>
+            <h1>SNAKE <span>84</span></h1>
+            <div class="marquee-stars" aria-hidden="true">★ ★ ★</div>
+          </header>
+
+          <div class="cabinet">
+            <div class="side-art side-art-left" aria-hidden="true">S</div>
+            <div class="side-art side-art-right" aria-hidden="true">84</div>
+
+            <div class="screen-bezel">
+              <div class="screen-meta">
+                <span><i class="status-led" id="status-led"></i><b id="status-text">READY</b></span>
+                <span class="screen-title">ERA <b id="era-year">1984</b></span>
+                <span>HI <b id="best-score">0000</b></span>
+              </div>
+
+              <div class="crt-screen">
+                <canvas id="game-board" width="600" height="600" aria-label="Plateau du jeu Snake"></canvas>
+                <div class="scanlines" aria-hidden="true"></div>
+                <div class="glass-shine" aria-hidden="true"></div>
+
+                <div class="game-message" id="game-message">
+                  <div class="pixel-snake" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <p class="insert-text">INSERT COIN</p>
+                  <h2 id="message-title">READY?</h2>
+                  <p id="message-text">Mange les pommes.<br>Évite les murs.</p>
+                  <button class="screen-start" id="start-button" type="button">PRESS START</button>
+                </div>
+
+                <div class="era-transition" id="era-transition" aria-live="polite">
+                  <p>TIME WARP</p>
+                  <strong id="transition-year">2000</strong>
+                  <span id="transition-name">Y2K MODE</span>
+                </div>
+              </div>
+
+              <div class="screen-footer">
+                <span>PLAYER 1</span>
+                <strong>SCORE <b id="score">0000</b></strong>
+                <span>NEXT ERA <b id="next-era">5</b> 🍎</span>
+              </div>
+            </div>
+
+            <div class="control-deck">
+              <div class="deck-stripes" aria-hidden="true"></div>
+
+              <div class="joystick-wrap" aria-hidden="true">
+                <div class="joystick-stick"></div>
+                <div class="joystick-ball"></div>
+                <div class="joystick-base"></div>
+              </div>
+
+              <div class="deck-instructions">
+                <span>MOVE</span>
+                <strong>FLÈCHES / ZQSD</strong>
+              </div>
+
+              <div class="arcade-buttons">
+                <button class="arcade-button button-pause" id="pause-button" type="button" disabled>
+                  <span></span>Pause
+                </button>
+                <button class="arcade-button button-restart" id="restart-button" type="button">
+                  <span></span>Restart
+                </button>
+              </div>
+            </div>
+
+            <div class="cabinet-lower">
+              <div class="speaker speaker-left" aria-hidden="true"></div>
+
+              <button class="coin-door" id="coin-button" type="button" aria-label="Insérer une pièce et commencer">
+                <span class="coin-slot"></span>
+                <span class="coin-return">25¢</span>
+                <b>INSERT COIN</b>
+              </button>
+
+              <div class="speaker speaker-right" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="floor-shadow" aria-hidden="true"></div>
+      </section>
+
+      <aside class="asset-panel" aria-labelledby="asset-title">
+        <div class="panel-heading">
+          <p>VISUAL ASSETS</p>
+          <h2 id="asset-title">Voyage dans le temps</h2>
+          <span>Une nouvelle époque se débloque toutes les 5 pommes.</span>
+        </div>
+
+        <div class="theme-list">
+          <button class="theme-card active" type="button" data-theme-choice="neon" aria-pressed="true">
+            <span class="theme-preview preview-neon"><i>01</i></span>
+            <span class="theme-copy"><b>Arcade Age</b><small>1984 · Néon CRT</small></span>
+            <span class="theme-check">✓</span>
+          </button>
+
+          <button class="theme-card" type="button" data-theme-choice="red" aria-pressed="false">
+            <span class="theme-preview preview-red"><i>02</i></span>
+            <span class="theme-copy"><b>Cyber Wave</b><small>1995 · Rouge digital</small></span>
+            <span class="theme-check">✓</span>
+          </button>
+
+          <button class="theme-card" type="button" data-theme-choice="y2k" aria-pressed="false">
+            <span class="theme-preview preview-y2k"><i>03</i></span>
+            <span class="theme-copy"><b>Y2K Mode</b><small>2000 · Aqua & chrome</small></span>
+            <span class="theme-check">✓</span>
+          </button>
+
+          <button class="theme-card" type="button" data-theme-choice="jungle" aria-pressed="false">
+            <span class="theme-preview preview-jungle"><i>04</i></span>
+            <span class="theme-copy"><b>Bio Future</b><small>2026 · Vert organique</small></span>
+            <span class="theme-check">✓</span>
+          </button>
+        </div>
+
+        <div class="how-to-play">
+          <div class="how-title"><span>HOW TO PLAY</span><i>1 PLAYER</i></div>
+          <ol>
+            <li><b>01</b><span>Appuie sur <strong>START</strong></span></li>
+            <li><b>02</b><span>Bouge avec <strong>ZQSD</strong></span></li>
+            <li><b>03</b><span><strong>5 pommes</strong> = nouvelle époque</span></li>
+          </ol>
+        </div>
+
+        <div class="mobile-pad" aria-label="Commandes tactiles">
+          <span></span>
+          <button type="button" data-direction="up" aria-label="Monter">▲</button>
+          <span></span>
+          <button type="button" data-direction="left" aria-label="Aller à gauche">◀</button>
+          <button type="button" data-direction="down" aria-label="Descendre">▼</button>
+          <button type="button" data-direction="right" aria-label="Aller à droite">▶</button>
+        </div>
+
+        <div class="credits">
+          <span>BEST PLAYED WITH SOUND ON</span>
+          <span>© 1984 PIXEL PIT</span>
+        </div>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
